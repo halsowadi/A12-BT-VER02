@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">A12-BT</string>
+
+    <string name="first_Menu">First</string>
+    <string name="first_Selected">First Selected</string>
+    <string name="second_Menu">Second</string>
+    <string name="second_Selected">Second Selected</string>
+    <string name="third_Menu">Third</string>
+    <string name="third_Selected">Third Selected</string>
+    <string name="menu_first">1. Grant Permission</string>
+    <string name="menu_second">2. Search BT List</string>
+    <string name="menu_third">3. Connect to EV3</string>
+    <string name="Hello_World">Hello World!</string>
+    <string name="Hello_426">Hello Android 426</string>
+    <string name="fab">FAB Pressed</string>
+    <string name="button">BUTTON</string>
+</resources>
