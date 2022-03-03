@@ -1,14 +1,17 @@
-package com.example.a12_bt_ver02;
+package com.example.a12_bt_ver03;
 /*
 Hussein Alsowadi
 Last Updated: 1/23/22
 Template App
  */
 
-import com.example.a12_bt_ver02.databinding.ActivityMainBinding;
+import com.example.a12_bt_ver03.databinding.ActivityMainBinding;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
@@ -32,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothDevice cv_btDevice = null;
     private BluetoothSocket cv_btSocket = null;
     private ActivityMainBinding binding;
+    // Data stream to/from NXT bluetooth
+    private InputStream cv_is = null;
+    private OutputStream cv_os = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +104,15 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_third:
                 //Your code here
                 cpf_connectToEV3(cv_btDevice);
+                return true;
+            case R.id.menu_fourth:
+                cpf_EV3MoveMotor();
+                return true;
+            case R.id.menu_fifth:
+                cpf_EV3PlayTone();
+                return true;
+            case R.id.menu_sixith:
+                cpf_disconnFromEV3(cv_btDevice);
                 return true;
 
             default:
@@ -177,6 +192,8 @@ public class MainActivity extends AppCompatActivity {
             cv_btSocket = bd.createRfcommSocketToServiceRecord
                     (UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
             cv_btSocket.connect();
+            cv_is = cv_btSocket.getInputStream();
+            cv_os = cv_btSocket.getOutputStream();
             binding.vvTvOut2.setText("Connect to " + bd.getName() + " at " + bd.getAddress());
         }
         catch (Exception e) {
@@ -184,6 +201,63 @@ public class MainActivity extends AppCompatActivity {
                     e.getMessage() + "]");
         }
     }
+    private void cpf_disconnFromEV3(BluetoothDevice bd) {
+        try {
+            cv_btSocket.close();
+            cv_is.close();
+            cv_os.close();
+            binding.vvTvOut2.setText(bd.getName() + " is disconnect " );
+        } catch (Exception e) {
+            binding.vvTvOut2.setText("Error in disconnect -> " + e.getMessage());
+        }
+    }
+    // Communication Developer Kit Page 27
+    // 4.2.2 Start motor B & C forward at power 50 for 3 rotation and braking at destination
+    private void cpf_EV3MoveMotor() {
+        try {
+            byte[] buffer = new byte[20];       // 0x12 command length
 
+            buffer[0] = (byte) (20-2);
+            buffer[1] = 0;
+
+            buffer[2] = 34;
+            buffer[3] = 12;
+
+            buffer[4] = (byte) 0x80;
+
+            buffer[5] = 0;
+            buffer[6] = 0;
+
+            buffer[7] = (byte) 0xae;
+            buffer[8] = 0;
+
+            buffer[9] = (byte) 0x06;
+
+            buffer[10] = (byte) 0x81;
+            buffer[11] = (byte) 0x32;
+
+            buffer[12] = 0;
+
+            buffer[13] = (byte) 0x82;
+            buffer[14] = (byte) 0x84;
+            buffer[15] = (byte) 0x03;
+
+            buffer[16] = (byte) 0x82;
+            buffer[17] = (byte) 0xB4;
+            buffer[18] = (byte) 0x00;
+
+            buffer[19] = 1;
+
+            cv_os.write(buffer);
+            cv_os.flush();
+        }
+        catch (Exception e) {
+            binding.vvTvOut1.setText("Error in MoveForward(" + e.getMessage() + ")");
+        }
+    }
+    // 4.2.5 Play a 1Kz tone at level 2 for 1 sec.
+    private void cpf_EV3PlayTone() {
+
+    }
 
 }

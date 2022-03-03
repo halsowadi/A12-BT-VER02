@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.a12_bt_ver02">
+    package="com.example.a12_bt_ver03">
 
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <!-- The following code snippet demonstrates how to declare Bluetooth-related permissions
+in your app if it targets Android 12 or higher: -->
+    <!-- Needed only if your app looks for Bluetooth devices.
+             If your app doesn't use Bluetooth scan results to derive physical
+             location information, you can strongly assert that your app
+             doesn't derive physical location. -->
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+
+    <!-- Needed only if your app communicates with already-paired Bluetooth devices. -->
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.A12BT">
         <activity
-            android:name="com.example.a12_bt_ver02.MainActivity"
+            android:name="com.example.a12_bt_ver03.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

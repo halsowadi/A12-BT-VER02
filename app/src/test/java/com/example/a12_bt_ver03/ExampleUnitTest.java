@@ -1,4 +1,4 @@
-package com.example.a12_bt_ver02;
+package com.example.a12_bt_ver03;
 
 import org.junit.Test;
 
