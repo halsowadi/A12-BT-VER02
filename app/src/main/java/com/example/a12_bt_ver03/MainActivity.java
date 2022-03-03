@@ -6,6 +6,7 @@ Template App
  */
 
 import com.example.a12_bt_ver03.databinding.ActivityMainBinding;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -15,6 +16,7 @@ import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                         //Implement event handling
                         //// Context ctx =  MainActivity.this;
                         //// Toast.makeText(ctx, "Hello Hussein Alsowadi", Toast.LENGTH_LONG).show();
-                       // binding.textView.setText(R.string.Hello_426);
+                        // binding.textView.setText(R.string.Hello_426);
                     }
                 });
 
@@ -77,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     // Overriding onCreateoptionMenu() to make Option menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
+
     //Overriding onOptionsItemSelected to perform event on menu items
     //Setting Menu text when a option is selected
     @Override
@@ -119,19 +122,18 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(menuItem);
         }
     }
+
     private void cpf_checkBTPermissions() {
         if (ContextCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
             binding.vvTvOut1.setText("BLUETOOTH_SCAN already granted.\n");
-        }
-        else {
+        } else {
             binding.vvTvOut1.setText("BLUETOOTH_SCAN NOT granted.\n");
         }
         if (ContextCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_DENIED) {
             binding.vvTvOut2.setText("BLUETOOTH_CONNECT NOT granted.\n");
-        }
-        else {
+        } else {
             binding.vvTvOut2.setText("BLUETOOTH_CONNECT already granted.\n");
         }
     }
@@ -147,10 +149,9 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.BLUETOOTH_SCAN},
                     BLUETOOTH_SCAN_CODE);
-        }
-        else {
+        } else {
             Toast.makeText(MainActivity.this,
-                    "BLUETOOTH_SCAN already granted", Toast.LENGTH_SHORT) .show();
+                    "BLUETOOTH_SCAN already granted", Toast.LENGTH_SHORT).show();
         }
 
         if (ContextCompat.checkSelfPermission(MainActivity.this,
@@ -158,12 +159,12 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.BLUETOOTH_CONNECT},
                     BLUETOOTH_CONNECT_CODE);
-        }
-        else {
+        } else {
             Toast.makeText(MainActivity.this,
-                    "BLUETOOTH_CONNECT already granted", Toast.LENGTH_SHORT) .show();
+                    "BLUETOOTH_CONNECT already granted", Toast.LENGTH_SHORT).show();
         }
     }
+
     // Modify from chap14, pp390 findRobot()
     private BluetoothDevice cpf_locateInPairedBTList(String name) {
         BluetoothDevice lv_bd = null;
@@ -171,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
             cv_btInterface = BluetoothAdapter.getDefaultAdapter();
             cv_pairedDevices = cv_btInterface.getBondedDevices();
             Iterator<BluetoothDevice> lv_it = cv_pairedDevices.iterator();
-            while (lv_it.hasNext())  {
+            while (lv_it.hasNext()) {
                 lv_bd = lv_it.next();
                 if (lv_bd.getName().equalsIgnoreCase(name)) {
                     binding.vvTvOut1.setText(name + " is in paired list");
@@ -179,8 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             binding.vvTvOut1.setText(name + " is NOT in paired list");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             binding.vvTvOut1.setText("Failed in findRobot() " + e.getMessage());
         }
         return null;
@@ -188,36 +188,37 @@ public class MainActivity extends AppCompatActivity {
 
     // Modify frmo chap14, pp391 connectToRobot()
     private void cpf_connectToEV3(BluetoothDevice bd) {
-        try  {
+        try {
             cv_btSocket = bd.createRfcommSocketToServiceRecord
                     (UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
             cv_btSocket.connect();
             cv_is = cv_btSocket.getInputStream();
             cv_os = cv_btSocket.getOutputStream();
             binding.vvTvOut2.setText("Connect to " + bd.getName() + " at " + bd.getAddress());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             binding.vvTvOut2.setText("Error interacting with remote device [" +
                     e.getMessage() + "]");
         }
     }
+
     private void cpf_disconnFromEV3(BluetoothDevice bd) {
         try {
             cv_btSocket.close();
             cv_is.close();
             cv_os.close();
-            binding.vvTvOut2.setText(bd.getName() + " is disconnect " );
+            binding.vvTvOut2.setText(bd.getName() + " is disconnect ");
         } catch (Exception e) {
             binding.vvTvOut2.setText("Error in disconnect -> " + e.getMessage());
         }
     }
+
     // Communication Developer Kit Page 27
     // 4.2.2 Start motor B & C forward at power 50 for 3 rotation and braking at destination
     private void cpf_EV3MoveMotor() {
         try {
             byte[] buffer = new byte[20];       // 0x12 command length
 
-            buffer[0] = (byte) (20-2);
+            buffer[0] = (byte) (20 - 2);
             buffer[1] = 0;
 
             buffer[2] = 34;
@@ -250,11 +251,11 @@ public class MainActivity extends AppCompatActivity {
 
             cv_os.write(buffer);
             cv_os.flush();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             binding.vvTvOut1.setText("Error in MoveForward(" + e.getMessage() + ")");
         }
     }
+
     // 4.2.5 Play a 1Kz tone at level 2 for 1 sec.
     private void cpf_EV3PlayTone() {
 
