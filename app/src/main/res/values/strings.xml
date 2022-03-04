@@ -5,9 +5,9 @@
     <string name="menu_first">1. Grant Permission</string>
     <string name="menu_second">2. Search BT List</string>
     <string name="menu_third">3. Connect to EV3</string>
-    <string name="menu_fourth">3. Move EV3 Motor</string>
-    <string name="menu_fifth">3. Play EV3 Tone</string>
-    <string name="menu_sixith">3. Disconnect From EV3</string>
+    <string name="menu_fourth">4. Move EV3 Motor</string>
+    <string name="menu_fifth">5. Play EV3 Tone</string>
+    <string name="menu_sixith">6. Disconnect From EV3</string>
     <string name="Hello_World">Hello World!</string>
     <string name="Hello_426">Hello Android 426</string>
     <string name="fab">FAB Pressed</string>

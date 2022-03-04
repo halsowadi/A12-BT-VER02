@@ -258,7 +258,39 @@ public class MainActivity extends AppCompatActivity {
 
     // 4.2.5 Play a 1Kz tone at level 2 for 1 sec.
     private void cpf_EV3PlayTone() {
+        try {
+            byte[] buffer = new byte[15];       // 0x12 command length
+            buffer[0] = (byte) (15-2);
+            buffer[1] = 0;
+
+            buffer[2] = 34;
+            buffer[3] = 12;
+
+            buffer[4] = (byte) 0x80;
+
+            buffer[5] = 0;
+            buffer[6] = 0;
+
+            buffer[7] = (byte) 0x94;
+            buffer[8] = (byte) 0x01;
+
+            buffer[9] = (byte) 0x81;
+            buffer[10] = (byte) 0x02;
+
+            buffer[11] = (byte) 0x82;
+            buffer[12] = (byte) 0xE8;
+            buffer[13] = (byte) 0x03;
+
+            buffer[14] = (byte) 0x82;
+            buffer[15] = (byte) 0xE8;
+            buffer[16] = (byte) 0x03;
+
+            cv_os.write(buffer);
+            cv_os.flush();
+        } catch (Exception e) {
+            binding.vvTvOut1.setText("Error in EV3PlayTone(" + e.getMessage() + ")");
+        }
+    }
 
     }
 
-}
