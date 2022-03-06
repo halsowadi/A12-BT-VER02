@@ -227,6 +227,8 @@ public class MainActivity extends AppCompatActivity {
         try {
             byte[] buffer = new byte[20];       // 0x12 command length
 
+//            //12 00xxxx80 00 00 AE 00 06 81 32 00 82 84 03 82 B4 00 01
+//            //0F 00xxxx80 00 00 94 01 81 02 82 E8 03 82 E8 03
             buffer[0] = (byte) (20 - 2);
             buffer[1] = 0;
 
@@ -268,8 +270,34 @@ public class MainActivity extends AppCompatActivity {
     // 4.2.5 Play a 1Kz tone at level 2 for 1 sec.
     private void cpf_EV3PlayTone() {
         try {
-            byte[] buffer = new byte[15];       // 0x12 command length
-            buffer[0] = (byte) (15-2);
+//            byte[] buffer = new byte[15];       // 0x12 command length
+//            buffer[0] = (byte) (15-2);
+//            buffer[1] = 0;
+//
+//            buffer[2] = 34;
+//            buffer[3] = 12;
+//
+//            buffer[4] = (byte) 0x80;
+//
+//            buffer[5] = 0;
+//            buffer[6] = 0;
+//
+//            buffer[7] = (byte) 0x94;
+//            buffer[8] = (byte) 0x01;
+//
+//            buffer[9] = (byte) 0x81;
+//            buffer[10] = (byte) 0x02;
+//
+//            buffer[11] = (byte) 0x82;
+//            buffer[12] = (byte) 0xE8;
+//            buffer[13] = (byte) 0x03;
+//
+//            buffer[14] = (byte) 0x82;
+//            buffer[15] = (byte) 0xE8;
+//            buffer[16] = (byte) 0x03;
+            byte[] buffer = new byte[17];       // 0x12 command length
+
+            buffer[0] = (byte) (17 - 2);
             buffer[1] = 0;
 
             buffer[2] = 34;
@@ -277,22 +305,26 @@ public class MainActivity extends AppCompatActivity {
 
             buffer[4] = (byte) 0x80;
 
+//            buffer[5] = 0;
+//            buffer[6] = 0;
+//            //12 00xxxx80 00 00 AE 00 06 81 32 00 82 84 03 82 B4 00 01
+//            //0F 00xxxx80 00 00 94 01 81 02 82 E8 03 82 E8 03
             buffer[5] = 0;
             buffer[6] = 0;
 
             buffer[7] = (byte) 0x94;
-            buffer[8] = (byte) 0x01;
+            buffer[8] = 1;
 
             buffer[9] = (byte) 0x81;
-            buffer[10] = (byte) 0x02;
+            buffer[10] = 2;
 
             buffer[11] = (byte) 0x82;
-            buffer[12] = (byte) 0xE8;
-            buffer[13] = (byte) 0x03;
+            buffer[12] = (byte) 0xe8;
+            buffer[13] = 3;
 
             buffer[14] = (byte) 0x82;
-            buffer[15] = (byte) 0xE8;
-            buffer[16] = (byte) 0x03;
+            buffer[15] = (byte) 0xe8;
+            buffer[16] = 3;
 
             cv_os.write(buffer);
             cv_os.flush();
