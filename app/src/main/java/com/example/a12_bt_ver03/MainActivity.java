@@ -13,6 +13,7 @@ import android.bluetooth.BluetoothSocket;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
@@ -20,6 +21,8 @@ import java.util.UUID;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.ParcelUuid;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +34,7 @@ import androidx.core.content.ContextCompat;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = null;
     // BT Variables
     private final String CV_ROBOTNAME = "EV3A";
     private BluetoothAdapter cv_btInterface = null;
@@ -41,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
     // Data stream to/from NXT bluetooth
     private InputStream cv_is = null;
     private OutputStream cv_os = null;
-
+    //private static final UUID CONNECTION_UUID = UUID.fromString("00001101-0000-1000-8000-00165382A946");
+    private static final UUID CONNECTION_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -189,11 +194,15 @@ public class MainActivity extends AppCompatActivity {
     // Modify frmo chap14, pp391 connectToRobot()
     private void cpf_connectToEV3(BluetoothDevice bd) {
         try {
-            cv_btSocket = bd.createRfcommSocketToServiceRecord
-                    (UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+            //cv_btSocket = bd.createRfcommSocketToServiceRecord
+            cv_btSocket = bd.createInsecureRfcommSocketToServiceRecord
+                    (CONNECTION_UUID);
+                    //(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+
             cv_btSocket.connect();
             cv_is = cv_btSocket.getInputStream();
             cv_os = cv_btSocket.getOutputStream();
+
             binding.vvTvOut2.setText("Connect to " + bd.getName() + " at " + bd.getAddress());
         } catch (Exception e) {
             binding.vvTvOut2.setText("Error interacting with remote device [" +
