@@ -12,4 +12,6 @@
     <string name="Hello_426">Hello Android 426</string>
     <string name="fab">FAB Pressed</string>
     <string name="button">BUTTON</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
