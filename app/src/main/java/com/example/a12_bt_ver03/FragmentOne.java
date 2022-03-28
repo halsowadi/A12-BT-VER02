@@ -91,19 +91,18 @@ public class FragmentOne extends Fragment {
         cpf_checkBTPermissions();
 
 
-
-
-
-
-        binding.ToSecondFrag.setOnClickListener(new View.OnClickListener() {
+        binding.Connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cv_listener.cf_firedByFragment("fragment1", 1);
 
-
+                cpf_connectToEV3(cv_btDevice);
 
             }
         });
+
+
+
+
 
 
 

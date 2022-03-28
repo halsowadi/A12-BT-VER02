@@ -7,6 +7,8 @@ Template App
 
 import com.example.a12_bt_ver03.databinding.ActivityMainBinding;
 import com.example.a12_bt_ver03.databinding.FragmentOneBinding;
+import com.google.android.material.tabs.TabLayout;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements MyFragmentDataPas
     String myString;
     //private static final UUID CONNECTION_UUID = UUID.fromString("00001101-0000-1000-8000-00165382A946");
     private static final UUID CONNECTION_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private TabLayout tablayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +71,24 @@ public class MainActivity extends AppCompatActivity implements MyFragmentDataPas
         frag01 = new FragmentOne();
         frag02 = new FragmentTwo();
         setContentFragment(1);
+        getSupportActionBar().setElevation(0);
+        // attaching tab mediator
+        tablayout = findViewById(R.id.tablayout);
+        tablayout.addTab(tablayout.newTab().setText("Connect"));
+        tablayout.addTab(tablayout.newTab().setText("Drive"));
 
-
+        tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                setContentFragment(tab.getPosition()+1);
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
 
     }
 
