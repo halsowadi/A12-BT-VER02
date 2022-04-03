@@ -110,13 +110,14 @@ public class FragmentOne extends Fragment {
         binding.imgStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                stop((byte) 0x00);
             }
         });
 
         binding.imgUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cpf_EV3MoveMotor((byte) 0x00);
             }
         });
 
@@ -316,11 +317,42 @@ public class FragmentOne extends Fragment {
             buffer[14] = (byte) 0x84;
             buffer[15] = (byte) 0x03;
 
-            buffer[16] = (byte) 0x82;
-            buffer[17] = (byte) 0xB4;
+            buffer[16] = -80;
+            buffer[17] = (byte) 0x00;
             buffer[18] = (byte) 0x00;
 
-            buffer[19] = 1;
+            buffer[19] = 0;
+
+//            buffer[0] = (byte) (20 - 2);
+//            buffer[1] = 0;
+//
+//            buffer[2] = 34;
+//            buffer[3] = 12;
+//
+//            buffer[4] = (byte) 0x80;
+//
+//            buffer[5] = 0;
+//            buffer[6] = 0;
+//
+//            buffer[7] = (byte) 0xae;
+//            buffer[8] = 0;
+//
+//            buffer[9] = (byte) 0x06;
+//
+//            buffer[10] = (byte) 0x81;
+//            buffer[11] = (byte) 0x32;
+//
+//            buffer[12] = 0;
+//
+//            buffer[13] = (byte) 0x82;
+//            buffer[14] = (byte) 0x84;
+//            buffer[15] = (byte) 0x03;
+//
+//            buffer[16] = (byte) 0x82;
+//            buffer[17] = (byte) 0xB4;
+//            buffer[18] = (byte) 0x00;
+//
+//            buffer[19] = 1;
 
             cv_os.write(buffer);
             cv_os.flush();
@@ -347,23 +379,23 @@ public class FragmentOne extends Fragment {
             buffer[5] = 0;
             buffer[6] = 0;
 
-            buffer[7] = (byte) 0;
+            buffer[7] = (byte) 0xae;
             buffer[8] = 0;
 
-            buffer[9] = (byte) 0;
+            buffer[9] = (byte) 0x00;
 
-            buffer[10] = (byte) 0;
-            buffer[11] = (byte) 0;
+            buffer[10] = (byte) 0x00;
+            buffer[11] = (byte) 0x00;
 
             buffer[12] = 0;
 
-            buffer[13] = (byte) 0;
-            buffer[14] = (byte) 0;
-            buffer[15] = (byte) 0;
+            buffer[13] = (byte) 0x00;
+            buffer[14] = (byte) 0x00;
+            buffer[15] = (byte) 0x00;
 
-            buffer[16] = (byte) 0;
-            buffer[17] = (byte) 0;
-            buffer[18] = (byte) 0;
+            buffer[16] = (byte) 0x00;
+            buffer[17] = (byte) 0x00;
+            buffer[18] = (byte) 0x00;
 
             buffer[19] = 0;
 
