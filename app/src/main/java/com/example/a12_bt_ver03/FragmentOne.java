@@ -96,7 +96,7 @@ public class FragmentOne extends Fragment {
         setHasOptionsMenu(true);
 
                  x =((MainActivity) getActivity()).cpf_checkBTPermissions();
-                binding.vvTvOut1.setText(x);
+                binding.vvTvOut2.setText(x);
 
 
 
@@ -105,7 +105,7 @@ public class FragmentOne extends Fragment {
             public void onClick(View v) {
                 cv_btDevice =  ((MainActivity) getActivity()).cpf_locateInPairedBTList(CV_ROBOTNAME);
                String x= ((MainActivity) getActivity()).cpf_connectToEV3(cv_btDevice);
-               binding.vvTvOut1.setText(x);
+               binding.vvTvOut2.setText(x);
             }
         });
         binding.btnDisconnect.setOnClickListener(new View.OnClickListener() {
