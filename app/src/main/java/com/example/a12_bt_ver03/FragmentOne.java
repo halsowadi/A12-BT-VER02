@@ -110,20 +110,21 @@ public class FragmentOne extends Fragment {
         binding.imgStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stop((byte) 0x00);
+                cpf_EV3MoveMotor((byte)0);
             }
         });
 
         binding.imgUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cpf_EV3MoveMotor((byte) 0x00);
+                cpf_EV3MoveMotor((byte)50);
             }
         });
 
         binding.imgDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cpf_EV3MoveMotor((byte)-50);
             }
         });
 
@@ -286,7 +287,7 @@ public class FragmentOne extends Fragment {
 
     // Communication Developer Kit Page 27
     // 4.2.2 Start motor B & C forward at power 50 for 3 rotation and braking at destination
-    public void cpf_EV3MoveMotor(Byte stop) {
+    public void cpf_EV3MoveMotor(Byte action) {
         try {
             byte[] buffer = new byte[20];       // 0x12 command length
 
@@ -308,51 +309,21 @@ public class FragmentOne extends Fragment {
 
             buffer[9] = (byte) 0x06;
 
-            buffer[10] = (byte) 0x81;
-            buffer[11] = (byte) 0x32;
+            buffer[10] = (byte) 129;
+            buffer[11] = (byte) action;
 
             buffer[12] = 0;
 
-            buffer[13] = (byte) 0x82;
-            buffer[14] = (byte) 0x84;
-            buffer[15] = (byte) 0x03;
+            buffer[13] = (byte) -126;//does nothing
+            buffer[14] = (byte) -126;//does nothing
+            buffer[15] = (byte) 10;
 
-            buffer[16] = -80;
-            buffer[17] = (byte) 0x00;
+            buffer[16] = (byte) 0x82;
+            buffer[17] = (byte) 0xB4;
             buffer[18] = (byte) 0x00;
 
             buffer[19] = 0;
 
-//            buffer[0] = (byte) (20 - 2);
-//            buffer[1] = 0;
-//
-//            buffer[2] = 34;
-//            buffer[3] = 12;
-//
-//            buffer[4] = (byte) 0x80;
-//
-//            buffer[5] = 0;
-//            buffer[6] = 0;
-//
-//            buffer[7] = (byte) 0xae;
-//            buffer[8] = 0;
-//
-//            buffer[9] = (byte) 0x06;
-//
-//            buffer[10] = (byte) 0x81;
-//            buffer[11] = (byte) 0x32;
-//
-//            buffer[12] = 0;
-//
-//            buffer[13] = (byte) 0x82;
-//            buffer[14] = (byte) 0x84;
-//            buffer[15] = (byte) 0x03;
-//
-//            buffer[16] = (byte) 0x82;
-//            buffer[17] = (byte) 0xB4;
-//            buffer[18] = (byte) 0x00;
-//
-//            buffer[19] = 1;
 
             cv_os.write(buffer);
             cv_os.flush();
@@ -382,22 +353,23 @@ public class FragmentOne extends Fragment {
             buffer[7] = (byte) 0xae;
             buffer[8] = 0;
 
-            buffer[9] = (byte) 0x00;
+            buffer[9] = (byte) 0x06;
 
-            buffer[10] = (byte) 0x00;
-            buffer[11] = (byte) 0x00;
+            buffer[10] = (byte) 129;
+            buffer[11] = (byte) 0;
 
             buffer[12] = 0;
 
-            buffer[13] = (byte) 0x00;
-            buffer[14] = (byte) 0x00;
-            buffer[15] = (byte) 0x00;
+            buffer[13] = (byte) 0x82;
+            buffer[14] = (byte) 0x84;
+            buffer[15] = (byte) 0x03;
 
-            buffer[16] = (byte) 0x00;
-            buffer[17] = (byte) 0x00;
-            buffer[18] = (byte) 0x00;
+            buffer[16] = (byte) 0x82;
+            buffer[17] = (byte) 0xB4;
+            buffer[18] = (byte) 0x10;
 
-            buffer[19] = 0;
+
+            buffer[19] = -1;
 
             cv_os.write(buffer);
             cv_os.flush();
