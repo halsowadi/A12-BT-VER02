@@ -152,7 +152,7 @@ public class FragmentOne extends Fragment {
                 return true;
             case R.id.menu_fourth:
 
-                x=((MainActivity) getActivity()).cpf_EV3MoveMotor((byte) 0x00);
+                x=((MainActivity) getActivity()).cpf_EV3MoveMotor((byte)50);
                 binding.vvTvOut2.setText(x);
                 return true;
             case R.id.menu_fifth:

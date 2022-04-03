@@ -53,14 +53,15 @@ public class FragmentTwo extends Fragment {
         binding.imgStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String x=((MainActivity) getActivity()).cpf_EV3MoveMotor((byte)0);
+                binding.textView.setText(x);
             }
         });
 
         binding.imgUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String x=((MainActivity) getActivity()).cpf_EV3MoveMotor((byte) 0x00);
+                String x=((MainActivity) getActivity()).cpf_EV3MoveMotor((byte)50);
                 binding.textView.setText(x);
 
             }
@@ -69,18 +70,22 @@ public class FragmentTwo extends Fragment {
         binding.imgDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String x=((MainActivity) getActivity()).cpf_EV3MoveMotor((byte)-50);
+                binding.textView.setText(x);
             }
         });
 
         binding.imgLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
             }
         });
 
         binding.imgRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
             }
         });
 

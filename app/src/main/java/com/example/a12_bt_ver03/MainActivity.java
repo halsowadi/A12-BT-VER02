@@ -234,10 +234,8 @@ public class MainActivity extends AppCompatActivity implements MyFragmentDataPas
 
 
 
-    // Communication Developer Kit Page 27
-    // 4.2.2 Start motor B & C forward at power 50 for 3 rotation and braking at destination
-    public String cpf_EV3MoveMotor(Byte stop) {
-       String x = "sucess";
+    public String cpf_EV3MoveMotor(Byte action) {
+        String x="Sucess!";
         try {
             byte[] buffer = new byte[20];       // 0x12 command length
 
@@ -259,32 +257,33 @@ public class MainActivity extends AppCompatActivity implements MyFragmentDataPas
 
             buffer[9] = (byte) 0x06;
 
-            buffer[10] = (byte) 0x81;
-            buffer[11] = (byte) 0x32;
+            buffer[10] = (byte) 129;
+            buffer[11] = (byte) action;
 
             buffer[12] = 0;
 
-            buffer[13] = (byte) 0x82;
-            buffer[14] = (byte) 0x84;
-            buffer[15] = (byte) 0x03;
+            buffer[13] = (byte) -126;//does nothing
+            buffer[14] = (byte) -126;//does nothing
+            buffer[15] = (byte) 10;
 
             buffer[16] = (byte) 0x82;
             buffer[17] = (byte) 0xB4;
             buffer[18] = (byte) 0x00;
 
-            buffer[19] = 1;
+            buffer[19] = 0;
+
 
             cv_os.write(buffer);
             cv_os.flush();
         } catch (Exception e) {
-            x=("Error in MoveForward(" + e.getMessage() + ")");
+            x= ("Error in MoveForward(" + e.getMessage() + ")");
 
         }
         return x;
     }
 
     public String stop(Byte stop) {
-        String x = "Sucess";
+      String x="Sucess!";
         try {
             byte[] buffer = new byte[20];       // 0x12 command length
 
@@ -301,30 +300,31 @@ public class MainActivity extends AppCompatActivity implements MyFragmentDataPas
             buffer[5] = 0;
             buffer[6] = 0;
 
-            buffer[7] = (byte) 0;
+            buffer[7] = (byte) 0xae;
             buffer[8] = 0;
 
-            buffer[9] = (byte) 0;
+            buffer[9] = (byte) 0x06;
 
-            buffer[10] = (byte) 0;
+            buffer[10] = (byte) 129;
             buffer[11] = (byte) 0;
 
             buffer[12] = 0;
 
-            buffer[13] = (byte) 0;
-            buffer[14] = (byte) 0;
-            buffer[15] = (byte) 0;
+            buffer[13] = (byte) 0x82;
+            buffer[14] = (byte) 0x84;
+            buffer[15] = (byte) 0x03;
 
-            buffer[16] = (byte) 0;
-            buffer[17] = (byte) 0;
-            buffer[18] = (byte) 0;
+            buffer[16] = (byte) 0x82;
+            buffer[17] = (byte) 0xB4;
+            buffer[18] = (byte) 0x10;
 
-            buffer[19] = 0;
+
+            buffer[19] = -1;
 
             cv_os.write(buffer);
             cv_os.flush();
         } catch (Exception e) {
-            x="Error in MoveForward(" + e.getMessage() + ")";
+            x= ("Error in MoveForward(" + e.getMessage() + ")");
 
         }
         return x;
