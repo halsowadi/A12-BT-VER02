@@ -1,8 +1,7 @@
 package com.example.a12_bt_ver03;
 /*
-Hussein Alsowadi
-Last Updated: 1/23/22
-Template App
+EV3 Bluetooth Ver 01
+Note Move left, Move right non functioning
  */
 
 import com.example.a12_bt_ver03.databinding.ActivityMainBinding;
@@ -330,50 +329,7 @@ public class MainActivity extends AppCompatActivity implements MyFragmentDataPas
         return x;
     }
 
-//    public void cpf_EV3MoveMotor(Byte stop) {
-//        try {
-//            byte[] buffer = new byte[23];       // 0x12 command length
-//
-////            //12 00xxxx80 00 00 AE 00 06 81 32 00 82 84 03 82 B4 00 01
-////            //0F 00xxxx80 00 00 94 01 81 02 82 E8 03 82 E8 03
-//            buffer[0] = 21;
-//            buffer[1] = 0;
-//
-//            buffer[2] = 0;
-//            buffer[3] = 12;
-//
-//            buffer[4] = (byte) 0x80;
-//
-//            buffer[5] = 0;
-//            buffer[6] = 0;
-//
-//            buffer[7] = (byte) 0xae;
-//            buffer[8] = 0;
-//
-//            buffer[9] = (byte) 0x06;
-//
-//            buffer[10] = (byte) 0x81;
-//            buffer[11] = (byte) 0x32;
-//
-//            buffer[12] = 0;
-//
-//            buffer[13] = (byte) 0x82;
-//            buffer[14] = (byte) 0x84;
-//            buffer[15] = (byte) 0x03;
-//
-//            buffer[16] = (byte) 0x82;
-//            buffer[17] = (byte) 0xB4;
-//            buffer[18] = (byte) 0x00;
-//
-//            buffer[19] = 1;
-//
-//            cv_os.write(buffer);
-//            cv_os.flush();
-//        } catch (Exception e) {
-//            binding.vvTvOut1.setText("Error in MoveForward(" + e.getMessage() + ")");
-//
-//        }
-//    }
+
 
 
     // 4.2.5 Play a 1Kz tone at level 2 for 1 sec.

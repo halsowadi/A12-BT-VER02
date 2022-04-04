@@ -59,14 +59,13 @@ public class FragmentOne extends Fragment {
     // Data stream to/from NXT bluetooth
     private InputStream cv_is = null;
     private OutputStream cv_os = null;
-    String myString;
-    //private static final UUID CONNECTION_UUID = UUID.fromString("00001101-0000-1000-8000-00165382A946");
+
     private static final UUID CONNECTION_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
 
 
 
-    String myDataFromActivity;
+
 
 
 
